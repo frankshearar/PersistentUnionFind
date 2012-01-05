@@ -1,5 +1,5 @@
 Object subclass: #PersistentUnionFind
-	instanceVariableNames: 'ranks parents'
+	instanceVariableNames: 'arrayType ranks parents'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'PersistentUnionFind'!
@@ -12,15 +12,6 @@ The structure provides two methods - _find_ returns the representative of some c
 * parents is an array of the representative terms for each of the equivalence classes.!
 
 
-asses.!
-
-
-!PersistentUnionFind methodsFor: 'accessing' stamp: 'fbs 1/2/2012 13:56'!
-elementsOfClass: aParentObject
-	"Return all those objects with representative aParentObject. This returns all the elements in any particular equivalence call."
-	"asSet because the representative element points to itself: it will appear twice otherwise."
-	^ parents elementsOfClass: aParentObject.! !
-
 !PersistentUnionFind methodsFor: 'accessing' stamp: 'fbs 12/29/2011 17:56'!
 find: anObject
 	"Return the representative element of anObject's equivalence class."
@@ -29,28 +20,6 @@ find: anObject
 	parents := fAndCx first. "Path compression"
 	^ fAndCx second.! !
 
-!PersistentUnionFind methodsFor: 'accessing' stamp: 'fbs 1/3/2012 15:59'!
-union: anObject with: anotherObject
-	| cx cy rx ry |
-	cx := self find: anObject.
-	cy := self find: anotherObject.
-	(cx = cy) ifTrue: [^ self].
-	
-	rx := ranks at: cx.
-	ry := ranks at: cy.
-	
-	(rx > ry)
-		ifTrue: [
-			^ self copyWithRanks: (ranks at: cy put: ry + rx)
-				parents: (self storeSchemaTermFor: cy as: cx)].
-		
-	^ self copyWithRanks: (ranks at: cx put: ry + rx)
-		parents: (self storeSchemaTermFor: cx as: cy).! !
-
-
-!PersistentUnionFind methodsFor: 'private' stamp: 'fbs 1/3/2012 15:59'!
-copyWithRanks: anArray parents: anotherArray
-	^ self class new ranks: anArray parents: anotherArray.! !
 
 !PersistentUnionFind methodsFor: 'private' stamp: 'fbs 12/29/2011 17:36'!
 findAux: anObject in: anArray
@@ -68,9 +37,48 @@ ranks: anArray parents: anotherArray
 	ranks := anArray.
 	parents := anotherArray.! !
 
-!PersistentUnionFind methodsFor: 'private' stamp: 'fbs 1/2/2012 20:13'!
-storeSchemaTermFor: anObject as: anotherObject
-	^ parents at: anObject put: anotherObject.! !
+!PersistentUnionFind methodsFor: 'private' stamp: 'fbs 12/29/2011 17:46'!
+usingArrayType: aClass partitioning: someObjects
+	arrayType := aClass.
+	ranks := arrayType initially: (someObjects collect: [:unused| 1]).
+	parents := arrayType initially: someObjects.! !
+
+
+!PersistentUnionFind methodsFor: 'as yet unclassified' stamp: 'fbs 12/29/2011 20:50'!
+union: anObject with: anotherObject
+	| cx cy rx ry |
+	cx := self find: anObject.
+	cy := self find: anotherObject.
+	(cx = cy) ifTrue: [^ self].
+	
+	rx := ranks at: cx.
+	ry := ranks at: cy.
+	
+	(rx > ry)
+		ifTrue: [
+			^ self class new
+				ranks: (ranks at: cy put: cy + cx)
+				parents: (parents at: cy put: cx)].
+		
+	(ry < rx)
+		ifTrue: [
+			^ self class new
+				ranks: (ranks at: cx put: cy + cx)
+				parents: (parents at: cx put: cy)].
+
+	^ self class new
+		ranks: (ranks at: cx put: rx + 1)
+		parents: (parents at: cy put: cx).! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+PersistentUnionFind class
+	instanceVariableNames: ''!
+
+!PersistentUnionFind class methodsFor: 'instance creation' stamp: 'fbs 12/29/2011 17:46'!
+usingArrayType: aClass partitioning: someObjects
+	^ self new usingArrayType: aClass partitioning: someObjects.! !
+otherObject.! !
 
 !PersistentUnionFind methodsFor: 'private' stamp: 'fbs 12/31/2011 15:58'!
 usingArrayType: aClass partitioning: someObjects

@@ -19,7 +19,7 @@ asArray
 	^ self value asArray.! !
 
 
-!PersistentArray methodsFor: 'accessing' stamp: 'fbs 12/29/2011 13:10'!
+!PersistentArray methodsFor: 'accessing' stamp: 'fbs 12/29/2011 21:06'!
 at: anInteger
 	| t |
 	t := value.
@@ -29,8 +29,8 @@ at: anInteger
 			self reroot.
 			t1 := value.
 			t1 isDiff
-				ifFalse: [Error signal: 'Reroot returned a Diff']
-				ifTrue: [t1 array at: anInteger]]! !
+				ifTrue: [Error signal: 'Reroot returned a Diff']
+				ifFalse: [t1 array at: anInteger]]! !
 
 !PersistentArray methodsFor: 'accessing' stamp: 'fbs 12/29/2011 14:48'!
 at: anInteger put: anObject

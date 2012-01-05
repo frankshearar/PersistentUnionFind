@@ -42,11 +42,15 @@ isDiff
 	^ true.! !
 
 
-!Diff methodsFor: 'printing' stamp: 'fbs 12/28/2011 15:59'!
+!Diff methodsFor: 'printing' stamp: 'fbs 12/29/2011 21:19'!
 printOn: aStream
 	aStream
 		nextPutAll: 'Diff(';
-		nextPutAll: ({index printString. value printString. baseArray printString.} join: ', ');
+		nextPutAll: index printString;
+		nextPutAll: ', ';
+		nextPutAll: value printString;
+		nextPutAll: ', ';
+		nextPutAll: baseArray printString;
 		nextPutAll: ')'.
 	! !
 
@@ -58,4 +62,3 @@ Diff class
 !Diff class methodsFor: 'instance creation' stamp: 'fbs 12/28/2011 11:39'!
 index: anInteger value: anObject in: aPersistentArray
 	^ self new index: anInteger value: anObject in: aPersistentArray.! !
- anInteger value: anObject in: aPersistentArray.! !

@@ -4,6 +4,19 @@ TestCase subclass: #PersistentArrayTest
 	poolDictionaries: ''
 	category: 'PersistentUnionFind-Tests'!
 
+!PersistentArrayTest methodsFor: 'testing - accessing' stamp: 'fbs 12/29/2011 21:06'!
+testAtOnChangedArrayReturnsAssociatedValue
+	| arr arr2 |
+	arr := PersistentArray initially: #(3 2 1).
+	arr2 := arr at: 2 put: 99.
+	self assert: 99 equals: (arr2 at: 2).! !
+
+!PersistentArrayTest methodsFor: 'testing - accessing' stamp: 'fbs 12/29/2011 21:03'!
+testAtOnNewArrayReturnsAssociatedValue
+	| arr |
+	arr := PersistentArray initially: #(3 2 1).
+	self assert: 2 equals: (arr at: 2).! !
+
 !PersistentArrayTest methodsFor: 'testing - accessing' stamp: 'fbs 12/29/2011 11:39'!
 testAtPutLeavesWrappedArrayUnchanged
 	| array persistentArray |
