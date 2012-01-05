@@ -3,13 +3,13 @@ Ref subclass: #PersistentCollection
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'PersistentUnionFind'!
-!PersistentCollection commentStamp: 'fbs 12/29/2011 21:27' prior: 0!
-A PersistentArray is a reference to an array-like structure that permits one fast access to the _most recent version_ of the array, but also (slower) access to _previous versions_ of the array.
+!PersistentCollection commentStamp: 'fbs 1/1/2012 14:16' prior: 0!
+A PersistentCollection is a reference to an collection-like structure that permits one fast access to the _most recent version_ of the array, but also (slower) access to _previous versions_ of the array.
 
 #at: takes an index - an integer - and returns the value associated with that index.
 #at:put: takes an index and an object and associates the latter with the former. It returns a new PersistentArray (and, as a side effect, 'reroots' the backing Arr and Diff structures).
 
-An Arr wraps a SequenceableCollection. A Diff describes how to get a new array from an Arr - "like this Arr, but at index i put value v". Rerooting turns a base Arr - the original array - and a sequence of Diffs into an Arr - the current version - into a sequence of Diffs - how to recalculate a previous version - and the current version, an Arr. In other words, rerooting turns pointers into backpointers.
+An Arr wraps a Collection. A Diff describes how to get a new array from an Arr - "like this Arr, but at index i put value v". Rerooting turns a base Arr - the original array - and a sequence of Diffs into an Arr - the current version - into a sequence of Diffs - how to recalculate a previous version - and the current version, an Arr. In other words, rerooting turns pointers into backpointers.
 
 "Rerooting" permits O(1) access to arbitrary elements, and O(n) access to older versions of the array, where n is the number of versions.!
 
@@ -82,15 +82,16 @@ includes: anObject
 		
 	^ value includes: anObject.! !
 
-"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-PersistentCollection class
-	instanceVariableNames: ''!
+!PersistentCollection methodsFor: 'unification' stamp: 'fbs 1/2/2012 13:56'!
+elementsOfClass: aParentObject
+	self reroot.
+	^ value elementsOfClass: aParentObject.! !
 
-!PersistentCollection class methodsFor: 'instance creation' stamp: 'fbs 12/29/2011 11:38'!
-initially: anArray
-	^ self new wrapping: (Arr wrapping: anArray).! !
-lf reroot.
+
+!PersistentCollection methodsFor: 'enumerating' stamp: 'fbs 1/1/2012 18:29'!
+select: aUnaryBlockOrSelector
+	self reroot.
 	^ value select: aUnaryBlockOrSelector.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!

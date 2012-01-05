@@ -39,16 +39,14 @@ includes: anObject
 	^ array includes: anObject.! !
 
 
+!Arr methodsFor: 'unification' stamp: 'fbs 1/2/2012 13:50'!
+elementsOfClass: aParentObject
+	^ array elementsOfClass: aParentObject.! !
 
-"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-Arr class
-	instanceVariableNames: 'array'!
-
-!Arr class methodsFor: 'instance creation' stamp: 'fbs 12/28/2011 11:45'!
-wrapping: aSequenceableCollection
-	^ self new wrapping: aSequenceableCollection.! !
-tor.! !
+!Arr methodsFor: 'enumerating' stamp: 'fbs 1/1/2012 13:58'!
+select: aUnaryBlockOrSelector
+	^ array select: aUnaryBlockOrSelector.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 

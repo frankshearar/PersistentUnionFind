@@ -12,6 +12,12 @@ The structure provides two methods - _find_ returns the representative of some c
 * parents is an array of the representative terms for each of the equivalence classes.!
 
 
+!PersistentUnionFind methodsFor: 'accessing' stamp: 'fbs 1/2/2012 13:56'!
+elementsOfClass: aParentObject
+	"Return all those objects with representative aParentObject. This returns all the elements in any particular equivalence call."
+	"asSet because the representative element points to itself: it will appear twice otherwise."
+	^ parents elementsOfClass: aParentObject.! !
+
 !PersistentUnionFind methodsFor: 'accessing' stamp: 'fbs 12/29/2011 17:56'!
 find: anObject
 	"Return the representative element of anObject's equivalence class."
@@ -20,7 +26,7 @@ find: anObject
 	parents := fAndCx first. "Path compression"
 	^ fAndCx second.! !
 
-!PersistentUnionFind methodsFor: 'accessing' stamp: 'fbs 12/31/2011 16:01'!
+!PersistentUnionFind methodsFor: 'accessing' stamp: 'fbs 1/1/2012 21:44'!
 union: anObject with: anotherObject
 	| cx cy rx ry |
 	cx := self find: anObject.
@@ -36,15 +42,9 @@ union: anObject with: anotherObject
 				ranks: (ranks at: cy put: ry + rx)
 				parents: (parents at: cy put: cx)].
 		
-	(ry < rx)
-		ifTrue: [
-			^ self class new
-				ranks: (ranks at: cx put: ry + rx)
-				parents: (parents at: cx put: cy)].
-
 	^ self class new
-		ranks: (ranks at: cx put: rx + 1)
-		parents: (parents at: cy put: cx).! !
+		ranks: (ranks at: cx put: ry + rx)
+		parents: (parents at: cx put: cy).! !
 
 
 !PersistentUnionFind methodsFor: 'private' stamp: 'fbs 12/29/2011 17:36'!
@@ -77,11 +77,7 @@ PersistentUnionFind class
 !PersistentUnionFind class methodsFor: 'instance creation' stamp: 'fbs 12/29/2011 17:46'!
 usingArrayType: aClass partitioning: someObjects
 	^ self new usingArrayType: aClass partitioning: someObjects.! !
-entUnionFind methodsFor: 'private' stamp: 'fbs 12/31/2011 15:58'!
-usingArrayType: aClass partitioning: someObjects
-	arrayType := aClass.
-	ranks := arrayType initially: (DictionaryWithDefault wrapping: Dictionary new default: [:unused | 1]).
-	parents := arrayType initially: someObjects.! !
+= arrayType initially: someObjects.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
