@@ -18,7 +18,7 @@ wrapping: aDictionary
 	dict := aDictionary.! !
 
 
-!DictionaryWithIdentity methodsFor: 'as yet unclassified' stamp: 'fbs 12/30/2011 22:39'!
+!DictionaryWithIdentity methodsFor: 'printing' stamp: 'fbs 12/30/2011 22:39'!
 printOn: aStream
 	aStream
 		nextPutAll: self class name.
@@ -32,3 +32,4 @@ DictionaryWithIdentity class
 !DictionaryWithIdentity class methodsFor: 'instance creation' stamp: 'fbs 12/30/2011 08:03'!
 wrapping: aDictionary
 	^ self new wrapping: aDictionary.! !
+ionary.! !
