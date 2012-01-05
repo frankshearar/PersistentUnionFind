@@ -52,11 +52,11 @@ testAtPutWorksOnImmediateReferences
 	persistentArray := persistentArray at: 1 put: 4.
 	self assert: 4 equals: (persistentArray at: 1).! !
 
-!PersistentCollectionTest methodsFor: 'testing - accessing' stamp: 'fbs 12/29/2011 11:40'!
+!PersistentCollectionTest methodsFor: 'testing - accessing' stamp: 'fbs 1/1/2012 00:12'!
 testAtWorksOnImmediateReferences
 	| array persistentArray |
 	array := #(3 2 1).
-	persistentArray := PersistentArray initially: array.
+	persistentArray := PersistentCollection initially: array.
 	self assert: 3 equals: (persistentArray at: 1).
 	self assert: 2 equals: (persistentArray at: 2).
 	self assert: 1 equals: (persistentArray at: 3).! !
@@ -121,7 +121,6 @@ testIncludesWorksLikeAnyOtherCollection
 	arr := PersistentCollection initially: #(1 2 3).
 	self deny: (arr includes: 4).
 	self assert: ((arr at: 1 put: 4) includes: 4).! !
- !
 
 
 !PersistentCollectionTest methodsFor: 'testing - enumerating' stamp: 'fbs 1/1/2012 13:57'!
