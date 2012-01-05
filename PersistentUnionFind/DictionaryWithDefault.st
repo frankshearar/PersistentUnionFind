@@ -28,6 +28,11 @@ wrapping: aDictionary default: aUnaryBlockOrSelector
 	dict := aDictionary.
 	default := aUnaryBlockOrSelector.! !
 
+
+!DictionaryWithDefault methodsFor: 'testing' stamp: 'fbs 12/31/2011 15:39'!
+includes: key
+	^ dict includesKey: key.! !
+
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
 DictionaryWithDefault class
@@ -36,11 +41,6 @@ DictionaryWithDefault class
 !DictionaryWithDefault class methodsFor: 'instance creation' stamp: 'fbs 12/30/2011 23:14'!
 wrapping: aDictionary default: aUnaryBlockOrSelector
 	^ self new wrapping: aDictionary default: aUnaryBlockOrSelector.! !
- "!
-
-DictionaryWithDefault class
-	instanceVariableNames: ''!
-
-!DictionaryWithDefault class methodsFor: 'instance creation' stamp: 'fbs 12/30/2011 23:14'!
+' stamp: 'fbs 12/30/2011 23:14'!
 wrapping: aDictionary default: aUnaryBlockOrSelector
 	^ self new wrapping: aDictionary default: aUnaryBlockOrSelector.! !

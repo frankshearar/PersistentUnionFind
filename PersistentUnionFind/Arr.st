@@ -34,6 +34,10 @@ wrapping: aSequenceableCollection
 		ifFalse: [coll].! !
 
 
+!Arr methodsFor: 'testing' stamp: 'fbs 12/31/2011 10:52'!
+includes: anObject
+	^ array includes: anObject.! !
+
 
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
@@ -44,9 +48,7 @@ Arr class
 !Arr class methodsFor: 'instance creation' stamp: 'fbs 12/28/2011 11:45'!
 wrapping: aSequenceableCollection
 	^ self new wrapping: aSequenceableCollection.! !
-: 'enumerating' stamp: 'fbs 1/1/2012 13:58'!
-select: aUnaryBlockOrSelector
-	^ array select: aUnaryBlockOrSelector.! !
+tor.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 

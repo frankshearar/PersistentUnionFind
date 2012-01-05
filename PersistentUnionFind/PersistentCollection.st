@@ -74,6 +74,14 @@ reroot
 			t baseArray value: (Diff index: t index value: v1 in: self)]
 		ifTrue: [Error signal: 'Reroot returned a Diff']! !
 
+
+!PersistentCollection methodsFor: 'testing' stamp: 'fbs 12/31/2011 15:25'!
+includes: anObject
+	value isDiff
+		ifTrue: [self reroot].
+		
+	^ value includes: anObject.! !
+
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
 PersistentCollection class
@@ -82,13 +90,7 @@ PersistentCollection class
 !PersistentCollection class methodsFor: 'instance creation' stamp: 'fbs 12/29/2011 11:38'!
 initially: anArray
 	^ self new wrapping: (Arr wrapping: anArray).! !
-	self reroot.
-	^ value elementsOfClass: aParentObject.! !
-
-
-!PersistentCollection methodsFor: 'enumerating' stamp: 'fbs 1/1/2012 18:29'!
-select: aUnaryBlockOrSelector
-	self reroot.
+lf reroot.
 	^ value select: aUnaryBlockOrSelector.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!

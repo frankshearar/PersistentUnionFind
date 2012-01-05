@@ -4,16 +4,6 @@ TestCase subclass: #PersistentUnionFindTest
 	poolDictionaries: ''
 	category: 'PersistentUnionFind-Tests'!
 
-!PersistentUnionFindTest methodsFor: 'testing' stamp: 'fbs 12/30/2011 08:19'!
-testInitialStateHasNoUnification
-	| partition data |
-	data := #(1 2 3 4).
-	partition := PersistentUnionFind usingArrayType: PersistentCollection partitioning: data.
-	self assert: data first equals: (partition find: data first).
-	self assert: data second equals: (partition find: data second).
-	self assert: data third equals: (partition find: data third).
-	self assert: data fourth equals: (partition find: data fourth).! !
-
 
 !PersistentUnionFindTest methodsFor: 'testing - union' stamp: 'fbs 12/30/2011 08:19'!
 testUnionLeavesOtherEquivalenceClassesUnchanged
@@ -44,7 +34,17 @@ testUnionsDontAffectPreviousVersions
 	p4 := partition union: 1 with: 2.
 	self assert: (p2 find: 1) equals: (p2 find: 3).
 	self deny: (p2 find: 1) = (p2 find: 2).! !
-nd: data fourth).! !
+
+
+!PersistentUnionFindTest methodsFor: 'testing - instance creation' stamp: 'fbs 12/30/2011 08:19'!
+testInitialStateHasNoUnification
+	| partition data |
+	data := #(1 2 3 4).
+	partition := PersistentUnionFind usingArrayType: PersistentCollection partitioning: data.
+	self assert: data first equals: (partition find: data first).
+	self assert: data second equals: (partition find: data second).
+	self assert: data third equals: (partition find: data third).
+	self assert: data fourth equals: (partition find: data fourth).! !
 
 
 !PersistentUnionFindTest methodsFor: 'testing - map unions' stamp: 'fbs 12/31/2011 15:59'!

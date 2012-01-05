@@ -113,7 +113,6 @@ testRerootLeavesArraySeeminglyUnchanged
 	arr3 := arr2 reroot.
 	
 	self assert: #(1 2 4) equals: arr3 asArray! !
- !
 
 
 !PersistentCollectionTest methodsFor: 'testing - testing' stamp: 'fbs 12/31/2011 15:26'!
@@ -122,6 +121,7 @@ testIncludesWorksLikeAnyOtherCollection
 	arr := PersistentCollection initially: #(1 2 3).
 	self deny: (arr includes: 4).
 	self assert: ((arr at: 1 put: 4) includes: 4).! !
+ !
 
 
 !PersistentCollectionTest methodsFor: 'testing - enumerating' stamp: 'fbs 1/1/2012 13:57'!

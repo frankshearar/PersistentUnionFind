@@ -20,31 +20,7 @@ find: anObject
 	parents := fAndCx first. "Path compression"
 	^ fAndCx second.! !
 
-
-!PersistentUnionFind methodsFor: 'private' stamp: 'fbs 12/29/2011 17:36'!
-findAux: anObject in: anArray
-	| representative pair |
-	representative := anArray at: anObject.
-	^ (representative = anObject)
-		ifTrue: [{anArray. anObject.}]
-		ifFalse: [ | f |
-			pair := self findAux: representative in: anArray.
-			f := anArray at: anObject put: representative.
-			{f. representative.}]! !
-
-!PersistentUnionFind methodsFor: 'private' stamp: 'fbs 12/29/2011 20:29'!
-ranks: anArray parents: anotherArray
-	ranks := anArray.
-	parents := anotherArray.! !
-
-!PersistentUnionFind methodsFor: 'private' stamp: 'fbs 12/29/2011 17:46'!
-usingArrayType: aClass partitioning: someObjects
-	arrayType := aClass.
-	ranks := arrayType initially: (someObjects collect: [:unused| 1]).
-	parents := arrayType initially: someObjects.! !
-
-
-!PersistentUnionFind methodsFor: 'as yet unclassified' stamp: 'fbs 12/30/2011 22:23'!
+!PersistentUnionFind methodsFor: 'accessing' stamp: 'fbs 12/31/2011 16:01'!
 union: anObject with: anotherObject
 	| cx cy rx ry |
 	cx := self find: anObject.
@@ -70,6 +46,29 @@ union: anObject with: anotherObject
 		ranks: (ranks at: cx put: rx + 1)
 		parents: (parents at: cy put: cx).! !
 
+
+!PersistentUnionFind methodsFor: 'private' stamp: 'fbs 12/29/2011 17:36'!
+findAux: anObject in: anArray
+	| representative pair |
+	representative := anArray at: anObject.
+	^ (representative = anObject)
+		ifTrue: [{anArray. anObject.}]
+		ifFalse: [ | f |
+			pair := self findAux: representative in: anArray.
+			f := anArray at: anObject put: representative.
+			{f. representative.}]! !
+
+!PersistentUnionFind methodsFor: 'private' stamp: 'fbs 12/29/2011 20:29'!
+ranks: anArray parents: anotherArray
+	ranks := anArray.
+	parents := anotherArray.! !
+
+!PersistentUnionFind methodsFor: 'private' stamp: 'fbs 12/31/2011 15:58'!
+usingArrayType: aClass partitioning: someObjects
+	arrayType := aClass.
+	ranks := arrayType initially: (DictionaryWithDefault wrapping: Dictionary new default: [:unused | 1]).
+	parents := arrayType initially: someObjects.! !
+
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
 PersistentUnionFind class
@@ -78,9 +77,7 @@ PersistentUnionFind class
 !PersistentUnionFind class methodsFor: 'instance creation' stamp: 'fbs 12/29/2011 17:46'!
 usingArrayType: aClass partitioning: someObjects
 	^ self new usingArrayType: aClass partitioning: someObjects.! !
-otherObject.! !
-
-!PersistentUnionFind methodsFor: 'private' stamp: 'fbs 12/31/2011 15:58'!
+entUnionFind methodsFor: 'private' stamp: 'fbs 12/31/2011 15:58'!
 usingArrayType: aClass partitioning: someObjects
 	arrayType := aClass.
 	ranks := arrayType initially: (DictionaryWithDefault wrapping: Dictionary new default: [:unused | 1]).
