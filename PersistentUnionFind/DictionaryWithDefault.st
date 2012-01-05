@@ -7,9 +7,9 @@ Object subclass: #DictionaryWithDefault
 A DictionaryWithDefault is a Dictionary that, for unknown keys, maps those keys to some pluggable behaviour, instead of raising an exception.!
 
 
-!DictionaryWithDefault methodsFor: 'accessing' stamp: 'fbs 1/1/2012 22:01'!
+!DictionaryWithDefault methodsFor: 'accessing' stamp: 'fbs 12/30/2011 23:17'!
 at: key
-	^ dict at: key ifAbsentPut: [default value: key].! !
+	^ dict at: key ifAbsent: [default value: key].! !
 
 !DictionaryWithDefault methodsFor: 'accessing' stamp: 'fbs 12/30/2011 23:11'!
 at: key put: value
@@ -28,17 +28,15 @@ wrapping: aDictionary default: aUnaryBlockOrSelector
 	dict := aDictionary.
 	default := aUnaryBlockOrSelector.! !
 
-
-!DictionaryWithDefault methodsFor: 'testing' stamp: 'fbs 12/31/2011 15:39'!
-includes: key
-	^ dict includesKey: key.! !
-
-
-!DictionaryWithDefault methodsFor: 'unification' stamp: 'fbs 1/2/2012 13:55'!
-elementsOfClass: aParentObject
-	^ dict elementsOfClass: aParentObject.! !
-
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+DictionaryWithDefault class
+	instanceVariableNames: ''!
+
+!DictionaryWithDefault class methodsFor: 'instance creation' stamp: 'fbs 12/30/2011 23:14'!
+wrapping: aDictionary default: aUnaryBlockOrSelector
+	^ self new wrapping: aDictionary default: aUnaryBlockOrSelector.! !
+ "!
 
 DictionaryWithDefault class
 	instanceVariableNames: ''!
