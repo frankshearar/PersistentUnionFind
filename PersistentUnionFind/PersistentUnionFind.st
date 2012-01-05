@@ -44,7 +44,7 @@ usingArrayType: aClass partitioning: someObjects
 	parents := arrayType initially: someObjects.! !
 
 
-!PersistentUnionFind methodsFor: 'as yet unclassified' stamp: 'fbs 12/29/2011 20:50'!
+!PersistentUnionFind methodsFor: 'as yet unclassified' stamp: 'fbs 12/30/2011 22:23'!
 union: anObject with: anotherObject
 	| cx cy rx ry |
 	cx := self find: anObject.
@@ -57,13 +57,13 @@ union: anObject with: anotherObject
 	(rx > ry)
 		ifTrue: [
 			^ self class new
-				ranks: (ranks at: cy put: cy + cx)
+				ranks: (ranks at: cy put: ry + rx)
 				parents: (parents at: cy put: cx)].
 		
 	(ry < rx)
 		ifTrue: [
 			^ self class new
-				ranks: (ranks at: cx put: cy + cx)
+				ranks: (ranks at: cx put: ry + rx)
 				parents: (parents at: cx put: cy)].
 
 	^ self class new
