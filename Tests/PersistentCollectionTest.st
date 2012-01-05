@@ -52,11 +52,11 @@ testAtPutWorksOnImmediateReferences
 	persistentArray := persistentArray at: 1 put: 4.
 	self assert: 4 equals: (persistentArray at: 1).! !
 
-!PersistentCollectionTest methodsFor: 'testing - accessing' stamp: 'fbs 1/1/2012 00:12'!
+!PersistentCollectionTest methodsFor: 'testing - accessing' stamp: 'fbs 12/29/2011 11:40'!
 testAtWorksOnImmediateReferences
 	| array persistentArray |
 	array := #(3 2 1).
-	persistentArray := PersistentCollection initially: array.
+	persistentArray := PersistentArray initially: array.
 	self assert: 3 equals: (persistentArray at: 1).
 	self assert: 2 equals: (persistentArray at: 2).
 	self assert: 1 equals: (persistentArray at: 3).! !
@@ -113,6 +113,7 @@ testRerootLeavesArraySeeminglyUnchanged
 	arr3 := arr2 reroot.
 	
 	self assert: #(1 2 4) equals: arr3 asArray! !
+ !
 
 
 !PersistentCollectionTest methodsFor: 'testing - testing' stamp: 'fbs 12/31/2011 15:26'!

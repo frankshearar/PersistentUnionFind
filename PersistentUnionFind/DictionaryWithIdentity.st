@@ -1,17 +1,21 @@
-DictionaryWithDefault subclass: #DictionaryWithIdentity
-	instanceVariableNames: ''
+Object subclass: #DictionaryWithIdentity
+	instanceVariableNames: 'dict'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'PersistentUnionFind'!
-!DictionaryWithIdentity commentStamp: 'fbs 12/30/2011 23:21' prior: 0!
-A DictionaryWithDefault that maps unknown keys to themselves.!
+
+!DictionaryWithIdentity methodsFor: 'accessing' stamp: 'fbs 12/30/2011 08:10'!
+at: key
+	^ dict at: key ifAbsent: [key].! !
+
+!DictionaryWithIdentity methodsFor: 'accessing' stamp: 'fbs 12/30/2011 08:09'!
+at: key put: value
+	dict at: key put: value! !
 
 
-
-!DictionaryWithIdentity methodsFor: 'private' stamp: 'fbs 12/30/2011 23:12'!
+!DictionaryWithIdentity methodsFor: 'private' stamp: 'fbs 12/30/2011 08:02'!
 wrapping: aDictionary
-	super wrapping: aDictionary default: #yourself.! !
-
+	dict := aDictionary.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 

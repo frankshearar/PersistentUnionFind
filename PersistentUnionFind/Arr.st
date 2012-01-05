@@ -25,9 +25,13 @@ printOn: aStream
 		nextPutAll: ')'.! !
 
 
-!Arr methodsFor: 'private' stamp: 'fbs 12/28/2011 19:01'!
+!Arr methodsFor: 'private' stamp: 'fbs 12/30/2011 08:13'!
 wrapping: aSequenceableCollection
-	array := aSequenceableCollection copy.! !
+	| coll |
+	coll := aSequenceableCollection copy.
+	array := coll isDictionary
+		ifTrue: [DictionaryWithIdentity wrapping: coll]
+		ifFalse: [coll].! !
 
 
 
@@ -40,12 +44,7 @@ Arr class
 !Arr class methodsFor: 'instance creation' stamp: 'fbs 12/28/2011 11:45'!
 wrapping: aSequenceableCollection
 	^ self new wrapping: aSequenceableCollection.! !
-/2012 13:50'!
-elementsOfClass: aParentObject
-	^ array elementsOfClass: aParentObject.! !
-
-
-!Arr methodsFor: 'enumerating' stamp: 'fbs 1/1/2012 13:58'!
+: 'enumerating' stamp: 'fbs 1/1/2012 13:58'!
 select: aUnaryBlockOrSelector
 	^ array select: aUnaryBlockOrSelector.! !
 
