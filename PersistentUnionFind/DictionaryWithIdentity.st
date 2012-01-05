@@ -17,6 +17,13 @@ at: key put: value
 wrapping: aDictionary
 	dict := aDictionary.! !
 
+
+!DictionaryWithIdentity methodsFor: 'as yet unclassified' stamp: 'fbs 12/30/2011 22:39'!
+printOn: aStream
+	aStream
+		nextPutAll: self class name.
+	dict printElementsOn: aStream.	! !
+
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
 DictionaryWithIdentity class
