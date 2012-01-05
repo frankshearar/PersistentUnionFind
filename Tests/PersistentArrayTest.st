@@ -13,6 +13,16 @@ testAtPutLeavesWrappedArrayUnchanged
 
 	self assert: #(3 2 1) equals: array.! !
 
+!PersistentArrayTest methodsFor: 'testing - accessing' stamp: 'fbs 12/29/2011 14:49'!
+testAtPutOfSameValueApparentlyDoesNothing
+	| array persistentArray |
+	array := #(3 2 1).
+	persistentArray := PersistentArray initially: array.
+	persistentArray := persistentArray at: 1 put: 4.
+	persistentArray := persistentArray at: 1 put: 4.
+
+	self assert: #(4 2 1) equals: persistentArray asArray.! !
+
 !PersistentArrayTest methodsFor: 'testing - accessing' stamp: 'fbs 12/29/2011 11:39'!
 testAtPutReturnsaPersistentArray
 	| array persistentArray persistentArray2 |

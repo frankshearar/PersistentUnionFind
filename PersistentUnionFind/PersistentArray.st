@@ -25,10 +25,13 @@ at: anInteger
 				ifFalse: [Error signal: 'Reroot returned a Diff']
 				ifTrue: [t1 array at: anInteger]]! !
 
-!PersistentArray methodsFor: 'accessing' stamp: 'fbs 12/29/2011 13:14'!
+!PersistentArray methodsFor: 'accessing' stamp: 'fbs 12/29/2011 14:48'!
 at: anInteger put: anObject
 	| t |
 	self reroot.
+	((self at: anInteger) = anObject)
+		ifTrue: [^ self].
+	
 	t := value.
 	^ t isDiff
 		ifTrue: [Error signal: 'Reroot returns a Diff']
