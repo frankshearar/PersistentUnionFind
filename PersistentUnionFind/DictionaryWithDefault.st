@@ -16,17 +16,23 @@ at: key put: value
 	dict at: key put: value! !
 
 
+!DictionaryWithDefault methodsFor: 'enumerating' stamp: 'fbs 1/10/2012 22:33'!
+do: aUnaryBlock
+	^ dict values do: aUnaryBlock.! !
+
+!DictionaryWithDefault methodsFor: 'enumerating' stamp: 'fbs 1/10/2012 22:38'!
+inject: thisValue into: binaryBlock
+	| nextValue |
+	nextValue := thisValue.
+	self do: [:each | nextValue := binaryBlock value: nextValue value: each].
+	^nextValue! !
+
+
 !DictionaryWithDefault methodsFor: 'printing' stamp: 'fbs 12/30/2011 23:11'!
 printOn: aStream
 	aStream
 		nextPutAll: self class name.
 	dict printElementsOn: aStream.	! !
-
-
-!DictionaryWithDefault methodsFor: 'private' stamp: 'fbs 12/30/2011 23:12'!
-wrapping: aDictionary default: aUnaryBlockOrSelector
-	dict := aDictionary.
-	default := aUnaryBlockOrSelector.! !
 
 
 !DictionaryWithDefault methodsFor: 'testing' stamp: 'fbs 12/31/2011 15:39'!
@@ -37,6 +43,12 @@ includes: key
 !DictionaryWithDefault methodsFor: 'unification' stamp: 'fbs 1/2/2012 13:55'!
 elementsOfClass: aParentObject
 	^ dict elementsOfClass: aParentObject.! !
+
+
+!DictionaryWithDefault methodsFor: 'private' stamp: 'fbs 12/30/2011 23:12'!
+wrapping: aDictionary default: aUnaryBlockOrSelector
+	dict := aDictionary.
+	default := aUnaryBlockOrSelector.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 

@@ -25,9 +25,45 @@ testAtPutStoresMappedValue
 	self assert: 2 equals: (d at: 1).! !
 
 
+!DictionaryWithDefaultTest methodsFor: 'testing - enumerating' stamp: 'fbs 1/10/2012 22:32'!
+testDoRunsOverValues
+	| c dict d |
+	d := Dictionary new.
+	d at: 1 put: 2.
+	d at: 3 put: 4.
+	dict := DictionaryWithDefault wrapping: d default: [:i | Error signal: 'Block shouldn''t be run'].
+	
+	c := OrderedCollection new.
+	dict do: [:v | c add: v].
+	self assert: #(2 4) equals: c asArray.! !
+
+!DictionaryWithDefaultTest methodsFor: 'testing - enumerating' stamp: 'fbs 1/10/2012 22:41'!
+testInjectIntoFoldsValues
+	| dict d |
+	d := Dictionary new.
+	d at: 1 put: 2.
+	d at: 3 put: 4.
+	d at: 5 put: 6.
+	dict := DictionaryWithDefault wrapping: d default: [:i | Error signal: 'Block shouldn''t be run'].
+
+	self assert: (2 * 4 * 6) equals: (dict inject: 1 into: [:acc :each | acc * each]).! !
+
+
 !DictionaryWithDefaultTest methodsFor: 'testing - instance creation' stamp: 'fbs 12/30/2011 23:09'!
 testCanWrapNormalDictionary
 	DictionaryWithIdentity wrapping: Dictionary new default: #yourself.! !
+
+
+!DictionaryWithDefaultTest methodsFor: 'testing - printing' stamp: 'fbs 1/10/2012 22:41'!
+testPrintPrintsLikeUnderlyingDictionary
+	| dict d |
+	d := Dictionary new.
+	d at: 1 put: 2.
+	d at: 3 put: 4.
+	d at: 5 put: 6.
+	dict := DictionaryWithDefault wrapping: d default: [:i | Error signal: 'Block shouldn''t be run'].
+	
+	self assert: 'DictionaryWithDefault(1->2 3->4 5->6 )' equals: dict printString.! !
 
 
 !DictionaryWithDefaultTest methodsFor: 'testing - testing' stamp: 'fbs 12/31/2011 15:35'!

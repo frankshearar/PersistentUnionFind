@@ -89,6 +89,21 @@ elementsOfClass: aParentObject
 	^ value elementsOfClass: aParentObject.! !
 
 
+!PersistentCollection methodsFor: 'enumerating' stamp: 'fbs 1/10/2012 19:17'!
+do: aUnaryBlock
+	self reroot.
+	value do: aUnaryBlock.
+	
+	"Just to be clear that #do: is purely for side effects."
+	^ self.! !
+
+!PersistentCollection methodsFor: 'enumerating' stamp: 'fbs 1/10/2012 19:14'!
+inject: thisValue into: binaryBlock
+	| nextValue |
+	nextValue := thisValue.
+	self do: [:each | nextValue := binaryBlock value: nextValue value: each].
+	^nextValue! !
+
 !PersistentCollection methodsFor: 'enumerating' stamp: 'fbs 1/1/2012 18:29'!
 select: aUnaryBlockOrSelector
 	self reroot.

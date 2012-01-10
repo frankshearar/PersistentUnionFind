@@ -123,9 +123,43 @@ testIncludesWorksLikeAnyOtherCollection
 	self assert: ((arr at: 1 put: 4) includes: 4).! !
 
 
+!PersistentCollectionTest methodsFor: 'testing - enumerating' stamp: 'fbs 1/10/2012 19:20'!
+testDoIteratesOverCollection
+	| arr copy i |
+	copy := PersistentCollection initially: #(0 0 0 0).
+	arr := PersistentCollection initially: #(1 2 3 4).
+	i := 1.
+	arr do: [: each | copy := copy at: i put: each. i := i + 1].
+	
+	self assert: #(1 2 3 4) equals: copy asArray.! !
+
+!PersistentCollectionTest methodsFor: 'testing - enumerating' stamp: 'fbs 1/10/2012 19:21'!
+testInjectIntoFoldsCollection
+	| arr |
+	arr := PersistentCollection initially: #(1 2 3 4).
+	self assert: 10 equals: (arr inject: 0 into: [:sum :each | sum + each]).! !
+
+!PersistentCollectionTest methodsFor: 'testing - enumerating' stamp: 'fbs 1/10/2012 19:20'!
+testInjectIntoOnEmptyCollectionReturnsInitialValue
+	| arr |
+	arr := PersistentCollection initially: #().
+	self assert: 0 equals: (arr inject: 0 into: [:sum :each | sum + each]).! !
+
+!PersistentCollectionTest methodsFor: 'testing - enumerating' stamp: 'fbs 1/10/2012 19:13'!
+testSelectAcceptsMessageNameAsArgument
+	| arr |
+	arr := PersistentCollection initially: #(1 2 3 4).
+	self assert: #(1 3) equals: (arr select: #odd).! !
+
 !PersistentCollectionTest methodsFor: 'testing - enumerating' stamp: 'fbs 1/1/2012 13:57'!
 testSelectOnEmptyCollectionDoesNothing
 	| arr |
 	arr := PersistentCollection initially: #().
 	self assert: #() equals: (arr select: [:o | true]).
 	self assert: #() equals: (arr select: [:o | false]).! !
+
+!PersistentCollectionTest methodsFor: 'testing - enumerating' stamp: 'fbs 1/10/2012 19:12'!
+testSelectReturnsElementsMatchingPredicate
+	| arr |
+	arr := PersistentCollection initially: #(1 2 3 4).
+	self assert: #(2 4) equals: (arr select: [:o | o even]).! !
