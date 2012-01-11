@@ -29,6 +29,20 @@ testElementsOfClassWithNonEmptyPartition
 	self assert: #(3) equals: (p2 elementsOfClass: 3).! !
 
 
+!PersistentUnionFindTest methodsFor: 'testing - enumerating' stamp: 'fbs 1/11/2012 09:22'!
+testInjectIntoAcceptsSymbols
+	| partition |
+	partition := PersistentUnionFind usingArrayType: PersistentCollection partitioning: (DictionaryWithIdentity wrapping: (Dictionary newFromPairs: #(1 1 2 2))).
+	
+	self assert: 3 equals: (partition inject: 0 into: #+).! !
+
+!PersistentUnionFindTest methodsFor: 'testing - enumerating' stamp: 'fbs 1/11/2012 09:21'!
+testInjectIntoFoldsOverRepresentativesOfEquivalenceClasses
+	| partition |
+	partition := PersistentUnionFind usingArrayType: PersistentCollection partitioning: (DictionaryWithIdentity wrapping: (Dictionary newFromPairs: #(1 1 2 2))).
+	
+	self assert: 3 equals: (partition inject: 0 into: [:sum :representative | sum + representative]).! !
+
 
 !PersistentUnionFindTest methodsFor: 'testing - instance creation' stamp: 'fbs 12/30/2011 08:19'!
 testInitialStateHasNoUnification

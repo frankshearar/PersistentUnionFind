@@ -45,6 +45,10 @@ union: anObject with: anotherObject
 		parents: (self storeSchemaTermFor: cx as: cy).! !
 
 
+!PersistentUnionFind methodsFor: 'enumerating' stamp: 'fbs 1/11/2012 09:13'!
+inject: thisValue into: binaryBlock
+	^ parents inject: thisValue into: binaryBlock.! !
+
 
 !PersistentUnionFind methodsFor: 'private' stamp: 'fbs 1/3/2012 15:59'!
 copyWithRanks: anArray parents: anotherArray
