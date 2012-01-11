@@ -45,6 +45,7 @@ union: anObject with: anotherObject
 		parents: (self storeSchemaTermFor: cx as: cy).! !
 
 
+
 !PersistentUnionFind methodsFor: 'private' stamp: 'fbs 1/3/2012 15:59'!
 copyWithRanks: anArray parents: anotherArray
 	^ self class new ranks: anArray parents: anotherArray.! !
