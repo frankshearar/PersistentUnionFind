@@ -89,13 +89,10 @@ elementsOfClass: aParentObject
 	^ value elementsOfClass: aParentObject.! !
 
 
-!PersistentCollection methodsFor: 'enumerating' stamp: 'fbs 1/10/2012 19:17'!
+!PersistentCollection methodsFor: 'enumerating' stamp: 'fbs 1/12/2012 19:10'!
 do: aUnaryBlock
 	self reroot.
-	value do: aUnaryBlock.
-	
-	"Just to be clear that #do: is purely for side effects."
-	^ self.! !
+	^ value do: aUnaryBlock.! !
 
 !PersistentCollection methodsFor: 'enumerating' stamp: 'fbs 1/10/2012 19:14'!
 inject: thisValue into: binaryBlock
@@ -116,4 +113,6 @@ PersistentCollection class
 
 !PersistentCollection class methodsFor: 'instance creation' stamp: 'fbs 12/29/2011 11:38'!
 initially: anArray
+	^ self new wrapping: (Arr wrapping: anArray).! !
+itially: anArray
 	^ self new wrapping: (Arr wrapping: anArray).! !
