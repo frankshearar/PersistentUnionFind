@@ -61,6 +61,21 @@ testAtWorksOnImmediateReferences
 	self assert: 2 equals: (persistentArray at: 2).
 	self assert: 1 equals: (persistentArray at: 3).! !
 
+!PersistentCollectionTest methodsFor: 'testing - accessing' stamp: 'fbs 1/15/2012 11:46'!
+testKeysReturnsDomain! !
+
+!PersistentCollectionTest methodsFor: 'testing - accessing' stamp: 'fbs 1/15/2012 11:47'!
+testKeysReturnsDomainForEmptyCollection
+	self assert: #() equals: (PersistentCollection initially: #()) keys.! !
+
+!PersistentCollectionTest methodsFor: 'testing - accessing' stamp: 'fbs 1/15/2012 11:47'!
+testKeysReturnsDomainForNonEmptyArray
+	self assert: #(1 2 3) equals: (PersistentCollection initially: #(4 5 6)) keys.! !
+
+!PersistentCollectionTest methodsFor: 'testing - accessing' stamp: 'fbs 1/15/2012 11:50'!
+testKeysReturnsDomainForNonEmptyDictionary
+	self assert: #(1 3 5) sort equals: (PersistentCollection initially: (DictionaryWithIdentity wrapping: (Dictionary newFromPairs: #(1 2 3 4 5 6)))) keys sort.! !
+
 !PersistentCollectionTest methodsFor: 'testing - accessing' stamp: 'fbs 12/30/2011 08:19'!
 testPersistentArraysPersist
 	| arr arr2 arr3 arr4 |

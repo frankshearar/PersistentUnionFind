@@ -11,6 +11,11 @@ An Arr is a wrapper for an array - really, a SequenceableCollection.!
 array
 	^ array! !
 
+!Arr methodsFor: 'accessing' stamp: 'fbs 1/15/2012 11:49'!
+keys
+	"Return the domain of the partial function this collection represents. Or, its indices."
+	^ array keys! !
+
 
 !Arr methodsFor: 'converting' stamp: 'fbs 12/28/2011 12:38'!
 asArray

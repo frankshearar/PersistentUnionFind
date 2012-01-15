@@ -57,6 +57,12 @@ at: anInteger put: anObject
 								value: anObject
 								in: self)]].! !
 
+!PersistentCollection methodsFor: 'accessing' stamp: 'fbs 1/15/2012 11:49'!
+keys
+	"Return the domain of the partial function this collection represents. Or, its indices."
+	self reroot.
+	^ value keys! !
+
 
 !PersistentCollection methodsFor: 'updating' stamp: 'fbs 12/29/2011 13:52'!
 reroot
@@ -113,6 +119,4 @@ PersistentCollection class
 
 !PersistentCollection class methodsFor: 'instance creation' stamp: 'fbs 12/29/2011 11:38'!
 initially: anArray
-	^ self new wrapping: (Arr wrapping: anArray).! !
-itially: anArray
 	^ self new wrapping: (Arr wrapping: anArray).! !

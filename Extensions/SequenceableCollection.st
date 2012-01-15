@@ -7,3 +7,8 @@ elementsOfClass: aParentObject
 	fakeDict := Dictionary new.
 	self doWithIndex: [:element :index | fakeDict at: index put: element].
 	^ fakeDict elementsOfClass: aParentObject.! !
+
+!SequenceableCollection methodsFor: '*PersistentUnionFind' stamp: 'fbs 1/15/2012 11:50'!
+keys
+	"The indices known to this collection."
+	^ 1 to: self size.! !

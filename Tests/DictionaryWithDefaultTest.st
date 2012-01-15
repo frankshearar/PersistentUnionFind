@@ -24,6 +24,18 @@ testAtPutStoresMappedValue
 	d at: 1 put: 2.
 	self assert: 2 equals: (d at: 1).! !
 
+!DictionaryWithDefaultTest methodsFor: 'testing - accessing' stamp: 'fbs 1/15/2012 11:32'!
+testKeysReturnsCollectionOfKnownValues
+	| d |
+	d := DictionaryWithDefault wrapping: (Dictionary newFromPairs: #(1 2 3 4)) default: #yourself.
+	self assert: #(1 3) equals: d keys.! !
+
+!DictionaryWithDefaultTest methodsFor: 'testing - accessing' stamp: 'fbs 1/15/2012 11:32'!
+testKeysReturnsEmptyCollectionForEmptyDictionary
+	| d |
+	d := DictionaryWithDefault wrapping: (Dictionary new) default: #yourself.
+	self assert: #() equals: d keys.! !
+
 
 !DictionaryWithDefaultTest methodsFor: 'testing - enumerating' stamp: 'fbs 1/10/2012 22:32'!
 testDoRunsOverValues

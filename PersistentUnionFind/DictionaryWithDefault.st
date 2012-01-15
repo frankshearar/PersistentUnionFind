@@ -15,6 +15,10 @@ at: key
 at: key put: value
 	dict at: key put: value! !
 
+!DictionaryWithDefault methodsFor: 'accessing' stamp: 'fbs 1/15/2012 11:30'!
+keys
+	^ dict keys! !
+
 
 !DictionaryWithDefault methodsFor: 'enumerating' stamp: 'fbs 1/10/2012 22:33'!
 do: aUnaryBlock
