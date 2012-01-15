@@ -112,6 +112,12 @@ select: aUnaryBlockOrSelector
 	self reroot.
 	^ value select: aUnaryBlockOrSelector.! !
 
+
+!PersistentCollection methodsFor: 'as yet unclassified' stamp: 'fbs 1/15/2012 20:12'!
+withValue: aUnaryBlock
+	self reroot.
+	^ aUnaryBlock value: value.! !
+
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
 PersistentCollection class
