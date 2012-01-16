@@ -31,6 +31,12 @@ inject: thisValue into: binaryBlock
 	self do: [:each | nextValue := binaryBlock value: nextValue value: each].
 	^nextValue! !
 
+!DictionaryWithDefault methodsFor: 'enumerating' stamp: 'fbs 1/16/2012 16:30'!
+reject: aUnaryBlock
+	^ self class
+		wrapping: (dict reject: aUnaryBlock)
+		default: default.! !
+
 
 !DictionaryWithDefault methodsFor: 'printing' stamp: 'fbs 12/30/2011 23:11'!
 printOn: aStream

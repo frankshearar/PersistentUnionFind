@@ -63,6 +63,12 @@ keys
 	self reroot.
 	^ value keys! !
 
+!PersistentCollection methodsFor: 'accessing' stamp: 'fbs 1/16/2012 15:58'!
+withValue: aUnaryBlock
+	"Run aUnaryBlock directly on the current version of the underlying collection. This method is DANGEROUS. If you don't know exactly what you're doing, STOP."
+	self reroot.
+	^ aUnaryBlock value: value.! !
+
 
 !PersistentCollection methodsFor: 'updating' stamp: 'fbs 12/29/2011 13:52'!
 reroot
@@ -107,16 +113,15 @@ inject: thisValue into: binaryBlock
 	self do: [:each | nextValue := binaryBlock value: nextValue value: each].
 	^nextValue! !
 
+!PersistentCollection methodsFor: 'enumerating' stamp: 'fbs 1/16/2012 15:52'!
+reject: aUnaryBlockOrSelector
+	self reroot.
+	^ value reject: aUnaryBlockOrSelector.! !
+
 !PersistentCollection methodsFor: 'enumerating' stamp: 'fbs 1/1/2012 18:29'!
 select: aUnaryBlockOrSelector
 	self reroot.
 	^ value select: aUnaryBlockOrSelector.! !
-
-
-!PersistentCollection methodsFor: 'as yet unclassified' stamp: 'fbs 1/15/2012 20:12'!
-withValue: aUnaryBlock
-	self reroot.
-	^ aUnaryBlock value: value.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 

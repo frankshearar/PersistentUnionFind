@@ -26,6 +26,10 @@ asArray
 do: aUnaryBlock
 	^ array do: aUnaryBlock.! !
 
+!Arr methodsFor: 'enumerating' stamp: 'fbs 1/16/2012 15:51'!
+reject: aUnaryBlockOrSelector
+	^ array reject: aUnaryBlockOrSelector.! !
+
 !Arr methodsFor: 'enumerating' stamp: 'fbs 1/1/2012 13:58'!
 select: aUnaryBlockOrSelector
 	^ array select: aUnaryBlockOrSelector.! !

@@ -160,6 +160,25 @@ testInjectIntoOnEmptyCollectionReturnsInitialValue
 	arr := PersistentCollection initially: #().
 	self assert: 0 equals: (arr inject: 0 into: [:sum :each | sum + each]).! !
 
+!PersistentCollectionTest methodsFor: 'testing - enumerating' stamp: 'fbs 1/16/2012 15:51'!
+testRejectAcceptsMessageNameAsArgument
+	| arr |
+	arr := PersistentCollection initially: #(1 2 3 4).
+	self assert: #(2 4) equals: (arr reject: #odd).! !
+
+!PersistentCollectionTest methodsFor: 'testing - enumerating' stamp: 'fbs 1/16/2012 15:51'!
+testRejectOnEmptyCollectionDoesNothing
+	| arr |
+	arr := PersistentCollection initially: #().
+	self assert: #() equals: (arr reject: [:o | true]).
+	self assert: #() equals: (arr reject: [:o | false]).! !
+
+!PersistentCollectionTest methodsFor: 'testing - enumerating' stamp: 'fbs 1/16/2012 15:51'!
+testRejectReturnsElementsNotMatchingPredicate
+	| arr |
+	arr := PersistentCollection initially: #(1 2 3 4).
+	self assert: #(1 3) equals: (arr reject: [:o | o even]).! !
+
 !PersistentCollectionTest methodsFor: 'testing - enumerating' stamp: 'fbs 1/10/2012 19:13'!
 testSelectAcceptsMessageNameAsArgument
 	| arr |

@@ -60,6 +60,21 @@ testInjectIntoFoldsValues
 
 	self assert: (2 * 4 * 6) equals: (dict inject: 1 into: [:acc :each | acc * each]).! !
 
+!DictionaryWithDefaultTest methodsFor: 'testing - enumerating' stamp: 'fbs 1/16/2012 16:34'!
+testRejectReturnsDictionaryWithoutMatchingValues
+	| dict d newDict |
+	d := Dictionary new.
+	d at: 'a' put: 1.
+	d at: 'b' put: 2.
+	d at: 'c' put: 3.
+	dict := DictionaryWithDefault wrapping: d default: [:i | Error signal: 'Block shouldn''t be run'].
+
+	newDict := dict reject: #odd.
+	self assert: dict class equals: newDict class.
+	self assert: 2 equals: (newDict at: 'b').
+	self deny: (newDict includes: 1).
+	self deny: (newDict includes: 3).! !
+
 
 !DictionaryWithDefaultTest methodsFor: 'testing - instance creation' stamp: 'fbs 12/30/2011 23:09'!
 testCanWrapNormalDictionary
