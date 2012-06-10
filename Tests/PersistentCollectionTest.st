@@ -92,6 +92,14 @@ testPersistentArraysPersist
 	"The alternative branch of changes."
 	self assert: #(4 5 3) equals: arr3 asArray.! !
 
+!PersistentCollectionTest methodsFor: 'testing - accessing' stamp: 'fbs 6/10/2012 23:07'!
+testWithValueExposesLatestVersionOfCollection
+	"#withValue: is a back door, permitting direct access to the inner workings of the PersistentCollection. That means it exposes the Arr that is the root of the change tree representing the versions of the collection."
+	| array referencedThing |
+	referencedThing := #(1 2 3).
+	array := PersistentCollection initially: referencedThing.
+	self assert: referencedThing = (array withValue: [:x | x]) array.! !
+
 
 !PersistentCollectionTest methodsFor: 'testing - maps' stamp: 'fbs 12/30/2011 08:19'!
 testAtOnUnknownValueWorksLikeIdentity
